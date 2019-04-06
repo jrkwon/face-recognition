@@ -27,9 +27,9 @@ cap = cv2.VideoCapture(video_path)
 if not cap.isOpened():
   exit()
 
-_, img_bgr = cap.read() # (800, 1920, 3)
+_, img_bgr = cap.read() # (480, 640, 3)  ## (800, 1920, 3)
 padding_size = 0
-resized_width = 1920
+resized_width = 640     # 1920
 video_size = (resized_width, int(img_bgr.shape[0] * resized_width // img_bgr.shape[1]))
 output_size = (resized_width, int(img_bgr.shape[0] * resized_width // img_bgr.shape[1] + padding_size * 2))
 
