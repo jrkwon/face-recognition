@@ -5,7 +5,9 @@ detector = dlib.get_frontal_face_detector()
 sp = dlib.shape_predictor('dlib-models/shape_predictor_68_face_landmarks.dat')
 facerec = dlib.face_recognition_model_v1('dlib-models/dlib_face_recognition_resnet_model_v1.dat')
 
-descs = np.load('face_description.npy')[()]
+loc_faces = 'datasets/faces/'
+descriptions = loc_faces+'face_descriptions.npy'
+descs = np.load(descriptions)[()]
 
 def encode_face(img):
   dets = detector(img, 1)
@@ -19,7 +21,7 @@ def encode_face(img):
 
     return np.array(face_descriptor)
 
-video_path = 'datasets/muhyeon.mp4'
+video_path = 'datasets/video.mp4'
 cap = cv2.VideoCapture(video_path)
 
 if not cap.isOpened():

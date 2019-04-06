@@ -1,8 +1,8 @@
 import dlib, cv2
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import matplotlib.patheffects as path_effects
+#import matplotlib.pyplot as plt
+#import matplotlib.patches as patches
+#import matplotlib.patheffects as path_effects
 
 detector = dlib.get_frontal_face_detector()
 sp = dlib.shape_predictor('dlib-models/shape_predictor_68_face_landmarks.dat')
@@ -39,18 +39,17 @@ def encode_faces(img, shapes):
     return np.array(face_descriptors)
 
 ## Create Face Descriptions
+loc_faces = 'datasets/faces/'
 img_paths = {
-    'neo': 'img/neo.jpg',
-    'trinity': 'img/trinity.jpg',
-    'morpheus': 'img/morpheus.jpg',
-    'smith': 'img/smith.jpg'
+    'eojun': loc_faces+'eojun.png',
+    'siyeong': loc_faces+'siyeong.png',
+    'jongchan': loc_faces+'jongchan.png'
 }
 
 descs = {
-    'neo': None,
-    'trinity': None,
-    'morpheus': None,
-    'smith': None
+    'eojun': None,
+    'siyeong': None,
+    'jongchan': None
 }
 
 for name, img_path in img_paths.items():
@@ -60,9 +59,10 @@ for name, img_path in img_paths.items():
     _, img_shapes, _ = find_faces(img_rgb)
     descs[name] = encode_faces(img_rgb, img_shapes)[0]
 
-np.save('img/descs.npy', descs)
-print(descs)
+np.save(loc_faces+'face_descriptions.npy', descs)
+#print(descs)
 
+"""
 ## Compute input
 img_bgr = cv2.imread('img/matrix5.jpg')
 img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
@@ -106,3 +106,4 @@ for i, desc in enumerate(descriptors):
 plt.axis('off')
 plt.savefig('result/output.png')
 plt.show()
+"""
